@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+{% load static %}
+{% block title %}
+My Blog
+{% endblock title %}
+{% block css_file %}
+<link rel="stylesheet" href=" {%static 'blogger/post.css' %}" />
+<link rel="stylesheet" href=" {%static 'blogger/welcome.css' %}" />
+
+{% endblock css_file %}
+{% block content %}
+
+<section id = "welcome">
+    <header>
+        <img src="{%static 'blogger/images/Sheng.jpg' %}" alt="David the author"/>
+        <h2> David's blogs</h2>
+    </header>
+    <p> Hi this is David </p>
+
+</section>
+
+<section id = "latest-posts">
+    <h2> My lates Post </h2>
+
+    <ul>
+        {% for post in posts %}
+        
+        {% include "blogger/includes/post.html" %}
+
+        {% endfor %}
+    </ul>
+
+</section>
+<section id = "about">
+
+<h2>
+    <p> I am a student in MIS and I thirve to enhance my programming ability!</p>
+</h2>
+<p> Let's discus the dreams, daily life and the exploring here!</p>
+</section>
+
+{% endblock content %}
+
+

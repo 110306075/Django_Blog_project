@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+{% load static %}
+{% block title %}
+All My Posts
+{% endblock title %}
+
+
+
+{% block content %}
+<section id ="all-posts">
+    <h2>My all post</h2>
+    <ul>
+     {% for post in posts %}
+     
+     <li>
+        <a href ="{{post.get_absolute_url}}">
+        {{post.title}} (rating: {{post.rating}})</a>
+     </li>
+
+     {% endfor %}
+
+    </ul>
+    
+
+</section>
+<p> Number of posts: {{number_of_post}}</p>
+ <p> Average rating: {{average_rating.rating__avg}}</p>
+{% endblock content %}

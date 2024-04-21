@@ -1,0 +1,83 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block title %}
+
+{% endblock %}
+{{ post.title }}
+{% block css_file %}
+  <link rel="stylesheet" href=" {% static 'blogger/indPost.css' %}" />
+{% endblock %}
+
+{% block content %}
+  <section id="summary">
+    <h2>{{ post.title }}</h2>
+
+    <div>
+      {% for tag in tags %}
+        <span class ="tags">{{ tag.captions }}</span>
+      {% endfor %}
+    </div>
+    <div id="read-later">
+      <form action="{% url "read_later" %}" method="post">
+        {% csrf_token %}
+        <input type="hidden" value="{{post.id}}" name="post_id">
+      
+        {% if is_stored is True %}
+        <button> Remove from read-later playlist </button>
+        {% else %}
+       <button> Read Later </button>
+        {% endif %}
+      </button>
+      </form>
+    </div>
+    <article>
+      <img src={{post.image.url}} alt="{{ post.title }}" />
+      <address>
+        <a href="mailto:{{ post.author.email }}">{{ post.author|title }}</a>
+      </address>
+      <div>
+        Updated on <time>{{ post.date|date:'d M Y' }}</time>
+      </div>
+    </article>
+  </section>
+  {% if comment_form.errors %}
+  <div id = "alert">
+  <h2> Saving the comment failed</h2>
+  <a href="#comment-form">Fix!</a>
+  </div>
+  {% endif %}
+
+
+  <main>
+    {{ post.content|linebreaks }}
+  </main>
+  <section id="comments">
+    <ul>
+      {% for comment in comments %}
+      <li>
+        <h2>{{comment.name}}</h2>
+        <p>{{comment.text}}</p>
+
+
+      </li>
+      {% endfor %}
+    </ul>
+  </section>
+  <section id = "comment-form">
+    <h2> Your Comment </h2>
+  <dvi>
+    <form action = "{% url "ind_post" post.slug %}"  method="post">
+      {% csrf_token %}
+      {% for field in comment_form  %}
+      <div class="form-control">
+          {{field.label_tag}}
+          {{field}}
+          {{field.errors}}
+      </div>
+      {% endfor %}
+     
+      <button> Save comment! </button>
+    </form>
+  </dvi>
+{% endblock %}

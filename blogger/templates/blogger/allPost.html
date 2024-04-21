@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+{% load static %}
+{% block title %}
+All My Posts
+{% endblock title %}
+
+{% block css_file %}
+<link rel="stylesheet" href=" {%static 'blogger/post.css' %}" />
+<link rel="stylesheet" href=" {%static 'blogger/allPost.css' %}" />
+
+{% endblock css_file %}
+
+{% block content %}
+<section id ="all-posts">
+    <h2>My all post</h2>
+    <ul>
+     {% for post in all_posts %}
+     
+     {% include "blogger/includes/post.html" %}
+
+     {% endfor %}
+
+    </ul>
+</section>
+
+{% endblock content %}

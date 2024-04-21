@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1> {{review.username}}</h1>
+    <p> {{review.rate}}</p>
+    <p> {{review.review}}</p>
+    {% if is_favorite %}
+    <p> this is the favorite</p>
+    {% else %}
+    <form action="/review/favorite" method="post"> 
+        {% csrf_token %}
+        <input type="hidden" name="review_id" value={{review.id}}>
+    <button> favorite</button>
+    </form>
+    {% endif %}
+    
+</body>
+</html>

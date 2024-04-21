@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+{% load static %}
+{% block title %}
+Read Later Playlist
+
+{% endblock title %}
+{% block css_file% %}
+<link rel="stylesheet" href="{% static 'blogger/readlater.css' %}">
+{% endblock css_file% %}
+{% block content %}
+<section id="stored-posts">
+    {% if not has_post %}
+    <p> There is no post in the read later playlist</p>
+    {% endif %}
+    <ul>
+        {% for  post in store_post %}
+        <li>
+            <a href="{% url "ind_post" post.slug%}"> {{post.title}}</a>
+        </li>
+        {% endfor %}
+        
+    </ul>
+</section>
+{% endblock content %}
